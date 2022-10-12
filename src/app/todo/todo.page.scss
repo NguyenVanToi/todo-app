@@ -1,0 +1,7 @@
+@import "./../../theme/function.scss";
+.wrap-list {
+    border-radius: $borderRadius;
+    .item-add {
+        color: var(--ion-color-primary);
+    }
+}

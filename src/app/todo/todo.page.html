@@ -3,14 +3,22 @@
     <ion-title>
       {{title}}
     </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismiss()">Close</ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <div class="content">
     <ion-list lines="full" class="wrap-list">
-      <ion-item>
-        <ion-label>Today</ion-label>
+      <ion-item *ngFor="let task of $tasks | async">
+        <ion-checkbox slot="start" color="success"></ion-checkbox>
+        <ion-label>{{task?.name}}</ion-label>
+      </ion-item>
+      <ion-item lines="none" class="item-add" (click)="addTodo()">
+        <ion-icon name="add" slot="start"></ion-icon>
+        <ion-label>Add</ion-label>
       </ion-item>
     </ion-list>
   </div>

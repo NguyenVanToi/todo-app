@@ -3,4 +3,6 @@ export interface Task {
   name?: string;
   description?: string;
   value?: number;
+  createdAt?: Date;
+  isFinished?: boolean;
 }

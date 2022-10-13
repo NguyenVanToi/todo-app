@@ -3,8 +3,21 @@
     <ion-title>
       {{task?._id ? task?.name : 'Create new task'}}
     </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismiss()">Close</ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 <ion-content [fullscreen]="true">
-  
+  <form class="form-todo" [formGroup]="formTask" (ngSubmit)="onSubmit()">
+    <div class="control transparent">
+      <input type="text" placeholder="Eg. Speak with Elsa in 15'" formControlName="name">
+    </div>
+    <div class="control transparent">
+      <textarea name="description" rows="10" placeholder="Description" formControlName="description"></textarea>
+    </div>
+    <div class="form-action">
+      <ion-button type="submit">Submit</ion-button>
+    </div>
+  </form>
 </ion-content>

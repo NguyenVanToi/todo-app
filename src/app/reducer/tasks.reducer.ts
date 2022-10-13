@@ -15,7 +15,7 @@ export const taskReducer = createReducer(
   on(createTask, (state, { task }) => [...state, task]),
   on(updateTask, (state, { task }) => {
     // eslint-disable-next-line no-underscore-dangle
-    const idx = state.find((item: Task) => item._id === task._id);
+    const idx = state.findIndex((item: Task) => item._id === task._id);
     const results = [...state];
     if (idx >= 0) {
       results[idx] = { ...task };

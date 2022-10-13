@@ -12,11 +12,11 @@
 <ion-content [fullscreen]="true">
   <div class="content">
     <ion-list lines="full" class="wrap-list">
-      <ion-item *ngFor="let task of $tasks | async" (click)="changeTask(task)">
-        <ion-checkbox slot="start" color="success" [checked]="task?.isFinished" (ionChange)="updateStatus($event, task)"></ion-checkbox>
-        <ion-label>{{task?.name}}</ion-label>
+      <ion-item *ngFor="let task of $tasks | async">
+        <ion-label slot="start" (click)="changeTask(task)" class="item-name">{{task?.name}}</ion-label>
+        <ion-checkbox slot="end" color="success" [checked]="task?.isFinished" (click)="updateStatus($event, task)"></ion-checkbox>
       </ion-item>
-      <ion-item lines="none" class="item-add" (click)="addTodo()">
+      <ion-item lines="none" class="item-add" (click)="changeTask()">
         <ion-icon name="add" slot="start"></ion-icon>
         <ion-label>Add</ion-label>
       </ion-item>

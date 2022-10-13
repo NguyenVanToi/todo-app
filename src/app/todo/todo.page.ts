@@ -36,10 +36,10 @@ export class TodoPage implements OnInit {
     });
   }
 
-  async addTodo(task?: Task) {
+  async changeTask(task?: Task) {
     const modal = await this.modalCtrl.create({
       component: PopupTodoComponent,
-      componentProps: task,
+      componentProps: { task },
       cssClass: 'custom-modal',
     });
     await modal.present();
@@ -51,15 +51,10 @@ export class TodoPage implements OnInit {
   updateStatus(e, task: Task) {
     e.stopPropagation();
     console.log('updateStatus', task);
-    return;
     const updatedTask: Task = { ...task, isFinished: !task.isFinished };
     this.taskService.updateTask(updatedTask).subscribe((data) => {
       console.log('updatedTask :>> ', data);
       this.store.dispatch(updateTask({ task: data }));
     });
-  }
-
-  changeTask(task: Task) {
-    console.log('task :>> ', task);
   }
 }

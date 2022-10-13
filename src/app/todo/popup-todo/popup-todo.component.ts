@@ -4,7 +4,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Task } from 'src/app/interfaces/Task';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { createTask } from 'src/app/state/actions/task.actions';
+import { createTask, updateTask } from 'src/app/state/actions/task.actions';
 
 @Component({
   selector: 'app-popup-todo',
@@ -24,8 +24,8 @@ export class PopupTodoComponent implements OnInit {
 
   ngOnInit() {
     this.formTask = this.fb.group({
-      name: ['', Validators.required],
-      description: [''],
+      name: [this.task?.name, Validators.required],
+      description: [this.task?.description],
     });
   }
 
@@ -38,6 +38,12 @@ export class PopupTodoComponent implements OnInit {
     // eslint-disable-next-line no-underscore-dangle
     if (this.task && this.task._id) {
       // patch
+      const updatedTask = { ...this.task, ...this.formTask.value };
+      this.taskService.updateTask(updatedTask).subscribe((data) => {
+        console.log('ta :>> ', data);
+        this.store.dispatch(updateTask({ task: data }));
+        this.modalCtrl.dismiss();
+      });
     } else {
       // create task
       const newTask = {

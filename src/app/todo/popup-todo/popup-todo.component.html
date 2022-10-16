@@ -17,7 +17,8 @@
       <textarea name="description" rows="10" placeholder="Description" formControlName="description"></textarea>
     </div>
     <div class="form-action">
-      <ion-button type="submit">Submit</ion-button>
+      <ion-button fill="clear" color="danger" (click)="removeTask(task)">Remove</ion-button>
+      <ion-button type="submit" fill="outline">Submit</ion-button>
     </div>
   </form>
 </ion-content>

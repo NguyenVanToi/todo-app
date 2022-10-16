@@ -4,7 +4,11 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Task } from 'src/app/interfaces/Task';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { createTask, updateTask } from 'src/app/state/actions/task.actions';
+import {
+  createTask,
+  deleteTask,
+  updateTask,
+} from 'src/app/state/actions/task.actions';
 
 @Component({
   selector: 'app-popup-todo',
@@ -57,5 +61,16 @@ export class PopupTodoComponent implements OnInit {
         this.modalCtrl.dismiss();
       });
     }
+  }
+
+  removeTask(task: Task) {
+    this.taskService.deleteTask(task).subscribe(
+      (data) => {
+        this.store.dispatch(deleteTask({ task }));
+      },
+      (error) => {
+        console.log('error :>> ', error);
+      }
+    );
   }
 }
